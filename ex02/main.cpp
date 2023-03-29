@@ -4,7 +4,7 @@
 // print the error and exit
 void	putError(std::string msg) {
 	std::cout << "\033[31m" << "[*] ERROR: " << msg << "\033[0m" << std::endl;
-	exit(1);
+	std::exit(1);
 }
 
 int main(int ac, char **av) {
