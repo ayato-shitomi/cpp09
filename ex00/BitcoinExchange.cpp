@@ -109,7 +109,7 @@ void	BitcoinExchange::rateCalculation(std::string line) {
 		_putErrorForRateCalculation("Too large: " + value);
 		return;
 	}
-	BEdata::iterator rating = _data.find(data);
+	BEdata::iterator rating = _data.lower_bound(data);
 	if (rating != _data.begin()) {
 		rating--;
 	}
