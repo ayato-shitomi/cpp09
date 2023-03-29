@@ -3,7 +3,7 @@
 
 void	putError(std::string msg) {
 	std::cout << "\033[31m" << msg << "\033[0m" << std::endl;
-	exit(1);
+	std::exit(1);
 }
 
 // function to convert a csv file to a map
