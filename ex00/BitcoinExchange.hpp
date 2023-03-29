@@ -11,7 +11,7 @@ class BitcoinExchange
 {
 	private:
 		BitcoinExchange(BitcoinExchange const &);
-		typedef				std::map<std::string, float>	BEdata;
+		typedef				std::map<std::string, double>	BEdata;
 		BEdata				_data;
 		BitcoinExchange		&operator=(BitcoinExchange const &);
 		bool				_validateLine(std::string line);

@@ -102,7 +102,7 @@ void	BitcoinExchange::rateCalculation(std::string line) {
 		_putErrorForRateCalculation("Invalid value: " + value);
 		return;
 	}
-	float val;
+	double val;
 	std::istringstream(value) >> val;
 	// check if the value is too large
 	if (val > 1000) {

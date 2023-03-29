@@ -84,3 +84,7 @@ $>
 > Warning: The container(s) you use to validate this exercise will no longer be usable for the rest of this module.
 
 > 警告 この演習を検証するために使用したコンテナは、このモジュールの残りの部分で使用できなくなります。
+
+## review
+
+- キーとバリューを保持できるからmapを使った

@@ -7,14 +7,14 @@ void	putError(std::string msg) {
 }
 
 // function to convert a csv file to a map
-std::map<std::string, float>	convertCsvToMap(std::string filePath) {
+std::map<std::string, double>	convertCsvToMap(std::string filePath) {
 	std::ifstream	lowData(filePath.c_str());
 	std::string 	line;
-	std::map<std::string, float>	ret;
+	std::map<std::string, double>	ret;
 
 	// check if file exists
 	if (lowData.fail()) {
-		putError("Error: could not read" + filePath + ".");
+		putError("Error: could not read " + filePath + ".");
 	}
 	// read file line by line
 	while (std::getline(lowData, line)) {
@@ -30,7 +30,7 @@ std::map<std::string, float>	convertCsvToMap(std::string filePath) {
 		// split line into key and value
 		std::string key = line.substr(0, splitPoint1);
 		std::string value = line.substr(splitPoint1 + 1, line.size() - splitPoint1 - 1);
-		// convert value to float
+		// convert value to double
 		std::istringstream(value) >> ret[key];
 	}
 	// check if file is empty
@@ -51,7 +51,7 @@ int main(int ac, char **av) {
 		putError("Error: could not read file '" + std::string(av[1]) + "'.");
 	}
 	// convert file to map
-	std::map<std::string, float> data = convertCsvToMap("./tmp/data.csv");
+	std::map<std::string, double> data = convertCsvToMap("./data.csv");
 	// create BitcoinExchange object
 	BitcoinExchange be(data);
 	// read input file line by line
