@@ -110,7 +110,9 @@ void	BitcoinExchange::rateCalculation(std::string line) {
 		return;
 	}
 	BEdata::iterator rating = _data.lower_bound(data);
-	if (rating != _data.begin()) {
+	if (rating->first != data) {
+		if (rating == _data.begin())
+			_putErrorForRateCalculation("Out of range: " + data);
 		rating--;
 	}
 	std::cout << data << " => " << value << " \t=\t" << rating->second * val << std::endl;
