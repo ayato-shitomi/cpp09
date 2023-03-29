@@ -3,6 +3,7 @@
 #include <sstream>
 #include <cstdlib>
 #include <climits>
+#include <cstring>
 
 // print the error and exit
 void	putError(std::string msg) {
@@ -46,6 +47,33 @@ bool chkNumbers(int num, std::string str) {
     return numStr.length() == str.length();
 }
 
+void removeExtraSpaces(char *str) {
+    int i, j;
+    int n = strlen(str);
+
+    // 先頭のスペースを除く
+    i = 0;
+    while (str[i] == ' ') {
+        i++;
+    }
+
+    // 末尾のスペースを除く
+    j = n - 1;
+    while (j >= 0 && str[j] == ' ') {
+        j--;
+    }
+
+    // スペースを1つにまとめる
+    int k = 0;
+    for (; i <= j; i++) {
+        if (str[i] == ' ' && str[i + 1] == ' ') {
+            continue;
+        }
+        str[k++] = str[i];
+    }
+    str[k] = '\0';
+}
+
 int main(int ac, char* av[]) {
 	// check if the argument is valid
 	if (ac != 2)
@@ -58,9 +86,10 @@ int main(int ac, char* av[]) {
 	
 	size_t n = 0;
 	size_t spaceCount = 1;
-	
-	while (av[1][n] != '\0') {
-		if (av[1][n] == ' ')
+	char *removeSpace = av[1];
+	removeExtraSpaces(av[1]);
+	while (removeSpace[n] != '\0') {
+		if (removeSpace[n] == ' ')
 			spaceCount++;
 		n++;
 	}
@@ -97,18 +126,18 @@ int main(int ac, char* av[]) {
 		if (token == "+" || token == "-" || token == "*" || token == "/") {
 			
 			// check if there are enough operands
-			if (numbers.size() < 2)
-				putError("Insufficient operands for '" + token + "' operator.");
+			//if (numbers.size() < 2)
+			//	putError("Insufficient operands for '" + token + "' operator.");
 			
 			// std::cout << "second:	" << numbers.top() << std::endl;
 			int secondNum = numbers.top(); numbers.pop();
 			if (!(chkNumbers(secondNum, tokens.top())))
-				putError("Over or under flow detected: " + tokens.top());
+				putError("Over or under flow detected: " + secondNum + ", " + tokens.top());
 			tokens.pop();
 			// std::cout << "first:	" << numbers.top() << std::endl;
 			int firstNum = numbers.top(); numbers.pop();
 			if (!(chkNumbers(firstNum, tokens.top())))
-				putError("Over or under flow detected: " + tokens.top());
+				putError("Over or under flow detected: " + firstNum + ", " + tokens.top());
 			tokens.pop();
 			int res;
 			if (secondNum < 0 || firstNum < 0)
