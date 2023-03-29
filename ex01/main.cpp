@@ -39,7 +39,8 @@ int main(int argc, char *argv[]) {
     std::vector<std::string> tokens = tokenize(input_expr);
     std::stack<int> operands;
 
-    for (const std::string &token : tokens) {
+    for (std::vector<std::string>::const_iterator it = tokens.begin(); it != tokens.end(); ++it) {
+        const std::string &token = *it;
         if (is_operator(token)) {
             if (operands.size() < 2) {
                 std::cerr << "Error" << std::endl;
