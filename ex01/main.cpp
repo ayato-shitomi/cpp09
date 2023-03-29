@@ -105,13 +105,18 @@ int main(int ac, char* av[]) {
 		count++;
 	}
 
-	// std::cout << "====" << std::endl;
-	/*
-	while (!tokens.empty()) {
-        std::cout << "stacks:	" << tokens.top() << std::endl;
-        tokens.pop();
+	///*
+	std::cout << "====" << std::endl;
+	
+	std::stack<std::string> tokensCopy(tokens);
+	while (!tokensCopy.empty()) {
+        std::cout << "stacks:	" << tokensCopy.top() << std::endl;
+        tokensCopy.pop();
     }
-	*/
+	std::cout << "====" << std::endl;
+
+	//*/
+	
 	/*
 	std::cout << "token tmp :	" << tokenTmp << std::endl;
 	std::cout << "argment   :	" << av[1] << std::endl;
@@ -129,15 +134,17 @@ int main(int ac, char* av[]) {
 			//if (numbers.size() < 2)
 			//	putError("Insufficient operands for '" + token + "' operator.");
 			
-			// std::cout << "second:	" << numbers.top() << std::endl;
+			std::cout << "second:	" << numbers.top() << " and ";
 			int secondNum = numbers.top(); numbers.pop();
+			std::cout  << secondNum << std::endl;
 			if (!(chkNumbers(secondNum, tokens.top())))
-				putError("Over or under flow detected: " + secondNum + ", " + tokens.top());
+				putError("Over or under flow detected: " + tokens.top());
 			tokens.pop();
-			// std::cout << "first:	" << numbers.top() << std::endl;
+			std::cout << "first:	" << numbers.top() << " and ";
 			int firstNum = numbers.top(); numbers.pop();
+			std::cout  << firstNum << std::endl;
 			if (!(chkNumbers(firstNum, tokens.top())))
-				putError("Over or under flow detected: " + firstNum + ", " + tokens.top());
+				putError("Over or under flow detected: " + tokens.top());
 			tokens.pop();
 			int res;
 			if (secondNum < 0 || firstNum < 0)
