@@ -1,12 +1,25 @@
+
 #include <iostream>
 #include <string>
 #include <stack>
 #include <sstream>
 #include <vector>
 #include <cstdlib>
+#include <iostream>
+#include <csignal>
+#include <cstdlib>
 
 bool is_operator(const std::string &token) {
     return token == "+" || token == "-" || token == "*" || token == "/";
+}
+
+void overflow_handler(int signal) {
+    if (signal == SIGABRT) {
+        std::cerr << "Error: Integer overflow detected." << std::endl;
+    } else {
+        std::cerr << "Error: Some error." << std::endl;
+    }
+    std::exit(1);
 }
 
 int perform_operation(const std::string &op, int a, int b) {
@@ -34,6 +47,8 @@ int main(int argc, char *argv[]) {
         std::cerr << "Error" << std::endl;
         return 1;
     }
+
+    std::signal(SIGABRT, overflow_handler);
 
     std::string input_expr(argv[1]);
     std::vector<std::string> tokens = tokenize(input_expr);
@@ -72,3 +87,5 @@ int main(int argc, char *argv[]) {
     std::cout << operands.top() << std::endl;
     return 0;
 }
+
+

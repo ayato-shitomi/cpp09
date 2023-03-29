@@ -1,7 +1,7 @@
 NAME 		= 	RPN
 
 CXX 		= 	c++
-CFLAG 		= 	-Wall -Wextra -Werror -std=c++98
+CFLAG 		= 	-Wall -Wextra -Werror -std=c++98 -ftrapv
 INCLUDES	=	-I.
 SRCDIR		=	./
 SRCS		=	$(shell ls *.cpp)
